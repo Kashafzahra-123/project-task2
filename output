@@ -1,0 +1,77 @@
+le set, falling back to 1 default profile: "default"
+
+2025-07-20T08:36:01.972-07:00 INFO 2724 --- [library-info-system] [ main] s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping S
+
+pring Data JPA repositories in default mode.
+
+2025-07-20T08:36:02.193-07:00 INFO 2724 --- [library-info-system] [ main] s.d.r.c.RepositoryConfigurationDelegate : Finished Spring
+
+Data repository scanning in 162 ms. Found 1 JPA repository interface.
+
+zed with port 8081 (HTTP)
+
+2025-07-20T08:36:05.702-07:00 INFO 2724 --- [library-info-system] [ main] o.apache.catalina.core.StandardService : Starting servic
+
+e [Tomcat]
+
+2025-07-20T08:36:05.702-07:00 INFO 2724 --- [library-info-system] [ main] o.apache.catalina.core.StandardEngine : Starting Servle
+
+t engine: [Apache Tomcat/10.1.19]
+
+2025-07-20T08:36:06.339-07:00 INFO 2724 --- [library-info-system] [ main] o.a.c.c.C.[Tomcat].[localhost].[/] : Initializing Sp
+
+ring embedded WebApplicationContext
+
+2025-07-20T08:36:06.339-07:00 INFO 2724 --- [library-info-system] [ main] w.s.c.ServletWebServerApplicationContext : Root WebApplica
+
+tionContext: initialization completed in 2839 ms
+
+2025-07-20T08:36:07.311-07:00 INFO 2724 --- [library-info-system] [ main] o.h.j.internal.util.LogHelper : HHH000204: Proc
+
+essing PersistenceUnitInfo [name: default]
+
+2025-07-20T08:36:08.433-07:00 INFO 2724 --- [library-info-system] [ main] org.hibernate.Version : HHH000412: Hibe
+
+rnate ORM core version 6.4.4.Final
+
+Added connection org.postgresql.jdbc.PgConnection@10f4ceab
+
+2025-07-20T08:36:10.793-07:00 INFO 2724 --- [library-info-system] [ main] com.zaxxer.hikari.HikariDataSource : HikariPool-1
+
+Start completed.
+
+2025-07-20T08:36:12.311-07:00 WARN 2724 --- [library-info-system] [ main] org.hibernate.orm.deprecation : HHH900025: Po
+
+Added connection org.postgresql.jdbc.PgConnection@10f4ceab
+
+2025-07-20T08:36:11.793-07:00 INFO 2724 --- [library-info-system] [ main] com.zaxxer.hikari.HikariDataSource : HikariPool-1
+
+Start completed.
+
+2025-07-20T08:36:12.311-07:00 WARN 2724 --- [library-info-system] [ main] org.hibernate.orm.deprecation : HHH900025: Po
+
+stgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect'
+
+ol)
+
+2025-07-20T08:36:16.600-07:00 INFO 2724 --- [library-info-system] [ main] o.h.e.t.j.p.i.platform.JtaPlatform : HHH000489: No J
+
+TA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+
+2025-07-20T08:36:16.835-07:00 INFO 2724 --- [library-info-system] [ main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA
+
+EntityManagerFactory for persistence unit 'default'
+
+2025-07-20T08:36:18.458-07:00 WARN 2724 --- [library-info-system] [ main] o.s.b.c.e.AnnotationConfigWebApplication : spring.jpa.open
+
+-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-vie
+
+w to disable this warning.
+
+2025-07-20T08:36:20.415-07:00 INFO 2724 --- [library-info-system] [ main] o.s.b.w.embedded.tomcat.TomcatWebServer : Tomcat started
+
+on port 8081 (HTTP) with context path ''
+
+2025-07-20T08:36:20.513-07:00 INFO 2724 --- [library-info-system] [ main] c.l.i.s.LibraryInfoSystemApplication : Started Library
+
+InfoSystemApplication in 23.158 seconds (process running for 24.365)
