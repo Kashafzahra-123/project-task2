@@ -1,0 +1,230 @@
+# Books API - Library Info System
+
+This README contains the complete code structure of the Books API in your Library Info System project. It includes the Entity, DTO, Controller, Service, Repository, and basic configuration for Spring Boot with PostgreSQL.
+
+---
+
+## 1. Book Entity - `Book.java`
+
+```java
+package com.library.library.info.system.model;
+
+import jakarta.persistence.*;
+
+@Entity
+public class Book {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String title;
+    private String author;
+    private String isbn;
+
+    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+}
+```
+
+---
+
+## 2. Book DTO - `BookDTO.java`
+
+```java
+package com.library.library.info.system.dto;
+
+public class BookDTO {
+    private String title;
+    private String author;
+    private String isbn;
+
+    // Getters and Setters
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+}
+```
+
+---
+
+## 3. Book Repository - `BookRepository.java`
+
+```java
+package com.library.library.info.system.repository;
+
+import com.library.library.info.system.model.Book;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface BookRepository extends JpaRepository<Book, Long> {
+}
+```
+
+---
+
+## 4. Book Service - `BookService.java`
+
+```java
+package com.library.library.info.system.service;
+
+import com.library.library.info.system.dto.BookDTO;
+import com.library.library.info.system.model.Book;
+import com.library.library.info.system.repository.BookRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class BookService {
+
+    @Autowired
+    private BookRepository bookRepository;
+
+    public Book addBook(BookDTO bookDTO) {
+        Book book = new Book();
+        book.setTitle(bookDTO.getTitle());
+        book.setAuthor(bookDTO.getAuthor());
+        book.setIsbn(bookDTO.getIsbn());
+        return bookRepository.save(book);
+    }
+
+    public List<Book> getAllBooks() {
+        return bookRepository.findAll();
+    }
+
+    public Optional<Book> getBookById(Long id) {
+        return bookRepository.findById(id);
+    }
+
+    public Book updateBook(Long id, BookDTO bookDTO) {
+        Optional<Book> bookOptional = bookRepository.findById(id);
+        if (bookOptional.isPresent()) {
+            Book book = bookOptional.get();
+            book.setTitle(bookDTO.getTitle());
+            book.setAuthor(bookDTO.getAuthor());
+            book.setIsbn(bookDTO.getIsbn());
+            return bookRepository.save(book);
+        }
+        return null;
+    }
+
+    public void deleteBook(Long id) {
+        bookRepository.deleteById(id);
+    }
+}
+```
+
+---
+
+## 5. Book Controller - `BookController.java`
+
+```java
+package com.library.library.info.system.controller;
+
+import com.library.library.info.system.dto.BookDTO;
+import com.library.library.info.system.model.Book;
+import com.library.library.info.system.service.BookService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/api/books")
+public class BookController {
+
+    @Autowired
+    private BookService bookService;
+
+    @PostMapping
+    public ResponseEntity<Book> addBook(@RequestBody BookDTO bookDTO) {
+        Book savedBook = bookService.addBook(bookDTO);
+        return ResponseEntity.ok(savedBook);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Book>> getAllBooks() {
+        return ResponseEntity.ok(bookService.getAllBooks());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Book>> getBookById(@PathVariable Long id) {
+        return ResponseEntity.ok(bookService.getBookById(id));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Book> updateBook(@PathVariable Long id, @RequestBody BookDTO bookDTO) {
+        Book updatedBook = bookService.updateBook(id, bookDTO);
+        return ResponseEntity.ok(updatedBook);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteBook(@PathVariable Long id) {
+        bookService.deleteBook(id);
+        return ResponseEntity.noContent().build();
+
+---
+
+## ✅ Testing
+
+Use Postman to test all the endpoints:
+
+* `POST /api/books` to add
+* `GET /api/books` to fetch all
+* `GET /api/books/{id}` to fetch one
+* `PUT /api/books/{id}` to update
+* `DELETE /api/books/{id}` to delede
